@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <!-- The Web Application display name, it can be displayed by some GUI tools -->
+    <display-name>PhotoBook REST WebApplication</display-name>
+    <!-- From Jersey documentation:
+         Jersey will dynamically add a Jersey container Servlet and set its name to javax.ws.rs.core.Application.
+         The web application path will be scanned and all the root resource classes
+         (the classes annotated with @Path annotation) as well as any providers that are annotated with @Provider
+         annotation packaged with the application will be automatically registered in the JAX-RS application.
+         The web application has to be packaged with a deployment descriptor specifying at least the mapping for
+         the added javax.ws.rs.core.Application Servlet -->
+    <servlet>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+</web-app>
