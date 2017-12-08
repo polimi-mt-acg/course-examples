@@ -23,7 +23,7 @@ public class PhotoBookResource {
     @GET
     @Produces("text/plain")
     public Response getPhotoBookAsPlain(@Context UriInfo uriInfo) {
-        System.out.println("GET request at URI: " + uriInfo.getAbsolutePath());
+        System.out.println("text/plain GET request at URI: " + uriInfo.getAbsolutePath());
         PhotoBook pb = PhotoBook.getInstance();
         StringBuilder sb = new StringBuilder();
 
@@ -38,5 +38,12 @@ public class PhotoBookResource {
         }
 
         return Response.ok(sb.toString()).build();
+    }
+
+    @GET
+    @Produces("application/json")
+    public PhotoBook getPhotoBookAsJSON(@Context UriInfo uriInfo) {
+        System.out.println("application/json GET request at URI: " + uriInfo.getAbsolutePath());
+        return PhotoBook.getInstance();
     }
 }
