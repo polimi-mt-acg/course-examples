@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <!-- The Web Application display name, it can be displayed by some GUI tools -->
-    <display-name>PhotoBook REST WebApplication</display-name>
+    <display-name>REST</display-name>
     <!-- From Jersey documentation:
          Jersey will dynamically add a Jersey container Servlet and set its name to javax.ws.rs.core.Application.
          The web application path will be scanned and all the root resource classes
@@ -13,10 +13,10 @@
          The web application has to be packaged with a deployment descriptor specifying at least the mapping for
          the added javax.ws.rs.core.Application Servlet -->
     <servlet>
-        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <servlet-name>com.github.polimi_mt_acg.RESTPhotoBook</servlet-name>
     </servlet>
     <servlet-mapping>
-        <servlet-name>javax.ws.rs.core.Application</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <servlet-name>com.github.polimi_mt_acg.RESTPhotoBook</servlet-name>
+        <url-pattern>/rest</url-pattern>
     </servlet-mapping>
 </web-app>
