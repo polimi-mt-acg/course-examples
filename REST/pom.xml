@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project info -->
-    <artifactId>RESTPhotoBook</artifactId>
+    <artifactId>REST</artifactId>
     <packaging>war</packaging>
 
     <!-- Build -->
@@ -26,42 +26,26 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <!-- Adds to ClassPath dependencies by default -->
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
     <!-- Dependencies -->
     <dependencies>
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>2.25.1</version>
-            <!-- goes in manifest classpath, but not included in WEB-INF/lib -->
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>2.25.1</version>
-            <optional>true</optional>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
             <version>2.25.1</version>
-            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+            <version>2.26</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

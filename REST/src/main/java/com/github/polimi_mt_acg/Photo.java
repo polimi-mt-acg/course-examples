@@ -3,6 +3,9 @@ package com.github.polimi_mt_acg;
 import javafx.scene.image.Image;
 import org.apache.commons.io.FilenameUtils;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +14,22 @@ import java.net.URI;
 /**
  * A Photo in the PhotoBook.
  */
+@XmlRootElement(name = "Photo")
 public class Photo {
+
+    @XmlElement
+    private String baseName;
+
+    @XmlElement
+    private String format;
+
+    @XmlElement
+    private double width;
+
+    @XmlElement
+    private double height;
+
+    @XmlTransient
     private File file;
 
     /**
@@ -19,8 +37,21 @@ public class Photo {
      *
      * @param photoURI the URI of the photo file.
      */
-    public Photo(URI photoURI) {
+    public Photo(URI photoURI) throws FileNotFoundException {
         file = new File(photoURI);
+        String filePath = file.getAbsolutePath();
+        Image img = buildImage();
+
+        baseName = FilenameUtils.getBaseName(filePath);
+        format = FilenameUtils.getExtension(filePath);
+        height = img.getHeight();
+        width = img.getWidth();
+    }
+
+    /**
+     * Default constructor required by JAXB
+     */
+    public Photo() {
     }
 
     /**
@@ -50,9 +81,9 @@ public class Photo {
         String filePath = file.getAbsolutePath();
         Image img = buildImage();
 
-        sb.append("fileName: ").append(FilenameUtils.getBaseName(filePath))
-                .append(", format: ").append(FilenameUtils.getExtension(filePath))
-                .append(", resolution: ").append(img.getHeight()).append("x").append(img.getWidth());
+        sb.append("fileName: ").append(baseName)
+                .append(", format: ").append(format)
+                .append(", resolution: ").append(height).append("x").append(width);
         return sb.toString();
     }
 }
