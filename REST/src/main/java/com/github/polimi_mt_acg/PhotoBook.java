@@ -1,5 +1,9 @@
 package com.github.polimi_mt_acg;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +12,12 @@ import java.util.List;
 /**
  * A PhotoBook. This class is a Singleton.
  */
+@XmlRootElement(name = "PhotoBook")
 public class PhotoBook {
+    @XmlTransient
     private static PhotoBook ourInstance = new PhotoBook();
+
+    @XmlElement
     private final List<Photo> pics;
 
     /**
@@ -49,7 +57,7 @@ public class PhotoBook {
             pics.add(new Photo(this.getClass().getResource("/github.png").toURI()));
             pics.add(new Photo(this.getClass().getResource("/google.png").toURI()));
             pics.add(new Photo(this.getClass().getResource("/microsoft.png").toURI()));
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
