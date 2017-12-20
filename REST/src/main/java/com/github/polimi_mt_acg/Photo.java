@@ -1,15 +1,13 @@
 package com.github.polimi_mt_acg;
 
-import javafx.scene.image.Image;
-import org.apache.commons.io.FilenameUtils;
-
+import javax.imageio.ImageIO;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.net.URI;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * A Photo in the PhotoBook.
@@ -30,22 +28,23 @@ public class Photo {
     private double height;
 
     @XmlTransient
-    private File file;
+    private BufferedImage image;
 
     /**
      * Constructor
      *
-     * @param photoURI the URI of the photo file.
+     * @param baseName Photo file baseName (e.g. "github")
+     * @param extension Photo file extension (e.g. "png")
+     * @param image Photo file input stream
+     * @throws IOException if {@code image} cannot be read into an Image
      */
-    public Photo(URI photoURI) throws FileNotFoundException {
-        file = new File(photoURI);
-        String filePath = file.getAbsolutePath();
-        Image img = buildImage();
+    public Photo(String baseName, String extension, InputStream image) throws IOException {
+        this.image = ImageIO.read(image);
 
-        baseName = FilenameUtils.getBaseName(filePath);
-        format = FilenameUtils.getExtension(filePath);
-        height = img.getHeight();
-        width = img.getWidth();
+        this.baseName = baseName;
+        format = extension;
+        height = this.image.getHeight();
+        width = this.image.getWidth();
     }
 
     /**
@@ -55,18 +54,10 @@ public class Photo {
     }
 
     /**
-     * @return a JavaFX Image showing this Photo.
-     * @throws FileNotFoundException if the photo file can't be found at the URI passed in the constructor
-     */
-    public Image buildImage() throws FileNotFoundException {
-        return new Image(new FileInputStream(file));
-    }
-
-    /**
      * @return the Photo file name (base name + extension)
      */
     public String getFileName() {
-        return FilenameUtils.getName(file.getAbsolutePath());
+        return baseName + "." + format;
     }
 
     /**
@@ -77,13 +68,8 @@ public class Photo {
      * @throws FileNotFoundException the photo file can't be found at the URI passed in the constructor
      */
     public String buildRepresentation() throws FileNotFoundException {
-        StringBuilder sb = new StringBuilder();
-        String filePath = file.getAbsolutePath();
-        Image img = buildImage();
-
-        sb.append("fileName: ").append(baseName)
-                .append(", format: ").append(format)
-                .append(", resolution: ").append(height).append("x").append(width);
-        return sb.toString();
+        return "fileName: " + baseName +
+                ", format: " + format +
+                ", resolution: " + height + "x" + width;
     }
 }
