@@ -32,10 +32,5 @@
             <artifactId>jersey-media-moxy</artifactId>
             <version>2.26</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.polimi_mt_acg</groupId>
-            <artifactId>course-examples</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>
