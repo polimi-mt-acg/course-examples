@@ -3,8 +3,7 @@ package com.github.polimi_mt_acg;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,10 +53,10 @@ public class PhotoBook {
 
     private void addDefaultImages() {
         try {
-            pics.add(new Photo(this.getClass().getResource("/github.png").toURI()));
-            pics.add(new Photo(this.getClass().getResource("/google.png").toURI()));
-            pics.add(new Photo(this.getClass().getResource("/microsoft.png").toURI()));
-        } catch (URISyntaxException | FileNotFoundException e) {
+            pics.add(new Photo("github", "png", this.getClass().getResourceAsStream("/github.png")));
+            pics.add(new Photo("google", "png", this.getClass().getResourceAsStream("/google.png")));
+            pics.add(new Photo("microsoft", "png", this.getClass().getResourceAsStream("/microsoft.png")));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

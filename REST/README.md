@@ -8,7 +8,7 @@ update image files to/from a server.
 
 ## Tested configuration
 - JDK 1.8.x
-- [Glassfish](https://javaee.github.io/glassfish/) 4.1.0
+- [WildFly (JBoss)](http://wildfly.org/downloads/) 12.0.0 Final
 
 ## Usage
 In this section some examples to test the REST endpoints are provided.
