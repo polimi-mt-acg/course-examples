@@ -6,7 +6,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.io.FileNotFoundException;
 
 /**
  * REST Resource of the PhotoBook
@@ -28,13 +27,8 @@ public class PhotoBookResource {
         StringBuilder sb = new StringBuilder();
 
         for (Photo img : pb.getPics()) {
-            try {
-                String repr = img.buildRepresentation();
-                sb.append(repr).append('\n');
-            } catch (FileNotFoundException e) {
-                System.out.println("Error in building string representation" +
-                        "of" + img.getFileName());
-            }
+            String repr = img.buildRepresentation();
+            sb.append(repr).append('\n');
         }
 
         return Response.ok(sb.toString()).build();

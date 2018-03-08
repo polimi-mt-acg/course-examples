@@ -67,7 +67,7 @@ public class Photo {
      * @return String representation of this Photo.
      * @throws FileNotFoundException the photo file can't be found at the URI passed in the constructor
      */
-    public String buildRepresentation() throws FileNotFoundException {
+    public String buildRepresentation() {
         return "fileName: " + baseName +
                 ", format: " + format +
                 ", resolution: " + height + "x" + width;
