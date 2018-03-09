@@ -8,6 +8,8 @@ services:
       - dbdata:/var/lib/mysql
     ports:
      - "127.0.0.1:3306:3306"
+    expose:
+     - "3306"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
