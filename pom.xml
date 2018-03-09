@@ -11,6 +11,7 @@
     <modules>
         <module>REST</module>
         <module>SOAPSoccer</module>
+        <module>JPA</module>
     </modules>
 
     <!-- JUnit versions -->
