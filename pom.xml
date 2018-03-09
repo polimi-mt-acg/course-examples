@@ -12,6 +12,7 @@
         <module>REST</module>
         <module>SOAPSoccer</module>
         <module>JPA</module>
+        <module>JPAHiber</module>
     </modules>
 
     <!-- JUnit versions -->
