@@ -5,49 +5,49 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @RunWith(Arquillian.class)
-class PhotoTest {
-    Photo p = new Photo("github", "png", this.getClass().getResourceAsStream("/github.png"));
+public class PhotoTest {
+    private Photo p;
 
-    PhotoTest() throws IOException {
+    public PhotoTest() throws IOException {
+        p = new Photo("github", "png", this.getClass().getResourceAsStream("/github.png"));
     }
 
     @Deployment
     public static JavaArchive createDeployment() {
         JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
                 .addClass(Photo.class)
+                .addAsResource("github.png")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         System.out.println(jar.toString(true));
         return jar;
     }
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         System.out.println("Setting up for test...");
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         System.out.println("Tearing down test...");
     }
 
     @Test
-    void getFileName() {
-        assertTrue("github.png".equals(p.getFileName()));
+    public void getFileName() {
+        Assert.assertTrue("github.png".equals(p.getFileName()));
     }
 
     @Test
-    void buildRepresentation() {
-        assertFalse("prova".equals(p.buildRepresentation()));
+    public void buildRepresentation() {
+        Assert.assertFalse("prova".equals(p.buildRepresentation()));
     }
 }

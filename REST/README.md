@@ -5,6 +5,7 @@ update image files to/from a server.
 ## Dependencies
 - [Jersey](https://jersey.github.io/) 2.25.1 (a JAX-RS implementation)
 - [Apache Common IO](https://commons.apache.org/proper/commons-io/) 2.5 (utility library)
+- [Arquillian-JUnit](http://arquillian.org/) (for testing)
 
 ## Tested configuration
 - JDK 1.8.x
