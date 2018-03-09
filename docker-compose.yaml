@@ -1,0 +1,21 @@
+version: '2'
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+     - "127.0.0.1:13306:13306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8001:80"
+    depends_on:
+      - mariadb
+    links:
+      - mariadb:db
+
+volumes:
+  dbdata:
