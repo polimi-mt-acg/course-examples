@@ -25,6 +25,7 @@ hs_err_pid*
 .idea/
 *.iml
 out/
+**/target/
 
 # Arquillian configs
 **/arquillian.xml
